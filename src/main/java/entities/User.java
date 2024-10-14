@@ -2,20 +2,23 @@ package entities;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public abstract class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private String username;
     private String password;
     private String address;
 
     public User() {
+        this.id = UUID.randomUUID();
     }
 
-    public User(int id, String username, String password, String address) {
+    public User(UUID id, String username, String password, String address) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -28,11 +31,11 @@ public abstract class User {
         this.username = username;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

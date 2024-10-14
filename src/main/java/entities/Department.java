@@ -3,14 +3,15 @@ package entities;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 
 @Entity
 @Table(name="departments")
 public class Department {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private UUID id;
     private String name;
     @OneToMany(mappedBy="department")
     private Set<Employee> employees;
@@ -22,16 +23,16 @@ public class Department {
         this.name = name;
     }
 
-    public Department(int id, String name) {
+    public Department(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
