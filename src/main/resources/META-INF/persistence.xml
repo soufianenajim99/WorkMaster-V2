@@ -7,7 +7,12 @@
 <!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
         <class>entities.User</class>
         <class>entities.Employee</class>
-<!--        <class>entities.Department</class>-->
+        <class>entities.Admin</class>
+        <class>entities.Recruiter</class>
+        <class>entities.Leave</class>
+        <class>entities.Condidature</class>
+        <class>entities.JobOffer</class>
+        <!--        <class>entities.Department</class>-->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/WorkmasterV2"/>

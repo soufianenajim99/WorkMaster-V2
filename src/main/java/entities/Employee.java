@@ -3,26 +3,33 @@ package entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name="employees")
 public class Employee extends User {
-    @Column(name = "children_number")
+    @Column(name = "children")
     private int children_number;
-    @Column(name = "leave_balance")
     private double leaveBalance;
-    @Column(name = "performance_rating")
     private double performanceRating;
-    @Column(name = "hire_date")
     private LocalDate hireDate;
-    @Column(name = "social_security_number")
     private String socialSecurityNumber;
-    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
     private double salary;
     @ManyToOne
     @JoinColumn(name="department_id")
     private Department department;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Leave> leaveHistory;
+
+    public List<Leave> getLeaveHistory() {
+        return leaveHistory;
+    }
+
+    public void setLeaveHistory(List<Leave> leaveHistory) {
+        this.leaveHistory = leaveHistory;
+    }
 
     public Employee() {
     }
@@ -51,7 +58,7 @@ public class Employee extends User {
 
 
 
-    public Employee(int id, String username, String password, String address, int children_number, double leaveBalance, double performanceRating, LocalDate hireDate, String socialSecurityNumber, LocalDate dateOfBirth, double salary, Department department) {
+    public Employee(UUID id, String username, String password, String address, int children_number, double leaveBalance, double performanceRating, LocalDate hireDate, String socialSecurityNumber, LocalDate dateOfBirth, double salary, Department department) {
         super(id, username, password, address);
         this.children_number = children_number;
         this.leaveBalance = leaveBalance;
