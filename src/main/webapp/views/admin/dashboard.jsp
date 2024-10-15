@@ -16,9 +16,9 @@
     <h1>Welcome to the Admin Dashboard</h1>
     <p>Hello, <%= session.getAttribute("user") %>! Here you can manage the system.</p>
     <ul>
-        <li><a href="manageUsers">Manage Users</a></li>
+        <li><a href="${pageContext.request.contextPath}/manageEmployees">Manage Users</a></li>
         <li><a href="viewReports">View Reports</a></li>
-        <li><a class="logout" href="../logout">Logout</a></li>
+        <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
     </ul>
 </div>
 </body>
