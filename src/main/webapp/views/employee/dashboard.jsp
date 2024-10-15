@@ -19,7 +19,7 @@
     <ul>
         <li><a href="viewTasks">View Tasks</a></li>
         <li><a href="updateProfile">Update Profile</a></li>
-        <li><a class="logout" href="../logout">Logout</a></li>
+        <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
     </ul>
 </div>
 </body>
