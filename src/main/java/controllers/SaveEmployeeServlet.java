@@ -34,8 +34,6 @@ public class SaveEmployeeServlet extends HttpServlet {
 
 
 
-
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
@@ -81,7 +79,7 @@ public class SaveEmployeeServlet extends HttpServlet {
             employee = new Employee(address, password, username, department, salary, dateOfBirth, socialSecurityNumber, hireDate, performanceRating, leaveBalance, childrenNumber);
             employeeService.save(employee);
         } else {
-            // Editing an existing employee
+
             UUID employeeId = UUID.fromString(id);
             employee = employeeService.findById(employeeId).orElseThrow();
             employee.setUsername(username);

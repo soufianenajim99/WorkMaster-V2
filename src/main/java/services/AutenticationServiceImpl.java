@@ -38,4 +38,23 @@ public class AutenticationServiceImpl implements AuthenticationService {
         } finally {
             entityManager.close();
         }
-}}
+}
+
+    public Object getUser(String entityName, String username, String password) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            String query = "SELECT u FROM " + entityName + " u WHERE u.username = :username AND u.password = :password";
+            return entityManager.createQuery(query)
+                    .setParameter("username", username)
+                    .setParameter("password", password)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
+
+}

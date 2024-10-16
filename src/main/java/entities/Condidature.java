@@ -23,12 +23,22 @@ public class Condidature {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private Status status;
+    private Status status ;
 
     // Relation to JobOffer
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)
     private JobOffer jobOffer;
+
+    public Condidature() {
+    }
+
+    public Condidature(String name, String email, Status status, JobOffer jobOffer) {
+        this.name = name;
+        this.email = email;
+        this.status = status;
+        this.jobOffer = jobOffer;
+    }
 
     // Getters and Setters
     public UUID getId() {

@@ -1,5 +1,8 @@
 package controllers;
 
+import entities.Admin;
+import entities.Employee;
+import entities.Recruiter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +33,8 @@ public class LoginServlet extends HttpServlet {
                 isAuthenticated = authenticationService.authenticateAdmin(username, password);
                 if (isAuthenticated) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", username);
+                    Admin admin =(Admin) authenticationService.getUser("Admin",username,password);
+                    session.setAttribute("user", admin);
                     response.sendRedirect("views/admin/dashboard.jsp"); // Redirect to admin dashboard
                 }
                 break;
@@ -39,7 +43,9 @@ public class LoginServlet extends HttpServlet {
                 isAuthenticated = authenticationService.authenticateRecruiter(username, password);
                 if (isAuthenticated) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", username);
+                    Recruiter recruiter =(Recruiter) authenticationService.getUser("Recruiter",username,password);
+                    session.setAttribute("user", recruiter);
+
                     response.sendRedirect("views/recruiter/dashboard.jsp"); // Redirect to recruiter dashboard
                 }
                 break;
@@ -48,7 +54,9 @@ public class LoginServlet extends HttpServlet {
                 isAuthenticated = authenticationService.authenticateEmployee(username, password);
                 if (isAuthenticated) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", username);
+                    Employee employee =(Employee) authenticationService.getUser("Employee",username,password);
+
+                    session.setAttribute("user", employee);
                     response.sendRedirect("views/employee/dashboard.jsp"); // Redirect to employee dashboard
                 }
                 break;
