@@ -32,7 +32,8 @@
     </form>
     <div class="apply-job">
         <h2>Or</h2>
-        <p>If you want to apply for a job offer, <a href="">click here</a>.</p>
+        <p>If you want to apply for a job offer, <a href="${pageContext.request.contextPath}/jobOffers">click here</a>.</p>
+
     </div>
 </div>
 </body>

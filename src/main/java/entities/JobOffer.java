@@ -2,6 +2,7 @@ package entities;
 import enums.Status;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -24,10 +25,10 @@ public class JobOffer {
     private Status status;
 
     @Column(name = "posteddate", nullable = false)
-    private Date postedDate;
+    private LocalDate postedDate;
 
     @Column(name = "validuntil", nullable = false)
-    private Date validUntil;
+    private LocalDate validUntil;
 
     // Relation to Condidature
     @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.ALL)
@@ -69,19 +70,19 @@ public class JobOffer {
         this.status = status;
     }
 
-    public Date getPostedDate() {
+    public LocalDate getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(Date postedDate) {
+    public void setPostedDate(LocalDate postedDate) {
         this.postedDate = postedDate;
     }
 
-    public Date getValidUntil() {
+    public LocalDate getValidUntil() {
         return validUntil;
     }
 
-    public void setValidUntil(Date validUntil) {
+    public void setValidUntil(LocalDate validUntil) {
         this.validUntil = validUntil;
     }
 
