@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="OffresEmploi">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Offre" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Titre" type="xsd:string" />
+                            <xsd:element name="Description" type="xsd:string" />
+                            <xsd:element name="Statut" type="xsd:string" />
+                            <xsd:element name="DatePublication" type="xsd:date" />
+                            <xsd:element name="DateExpiration" type="xsd:date" />
+                        </xsd:sequence>
+                        <xsd:attribute name="id" type="xsd:string">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+<!--    <xsd:simpleType name="UUID">-->
+<!--        <xsd:restriction base="xsd:string">-->
+<!--            <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />-->
+<!--        </xsd:restriction>-->
+<!--    </xsd:simpleType>-->
+</xsd:schema>

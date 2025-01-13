@@ -1,4 +1,5 @@
 package controllers;
+
 import entities.JobOffer;
 import entities.Recruiter;
 import enums.Status;
@@ -19,43 +20,51 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-@WebServlet("/addJobOffer")
-public class AddJobOfferServlet extends HttpServlet {
+@WebServlet("/editJobOffer")
+public class EditJobOfferServlet extends HttpServlet {
 
-JobOfferRepository jobOfferRepository = new JobOfferRepositoryImpl();
-JobOfferService jobOfferService = new JobOfferServiceImpl(jobOfferRepository);
+    JobOfferRepository jobOfferRepository = new JobOfferRepositoryImpl();
+    JobOfferService jobOfferService = new JobOfferServiceImpl(jobOfferRepository);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("views/recruiter/addJobOffer.jsp").forward(request, response);
+        String jobId = request.getParameter("id");
+
+        // Fetch the job offer by ID
+        JobOffer jobOffer = jobOfferService.findById(UUID.fromString(jobId)).get();
+
+        // Set the job offer as a request attribute to pre-fill the edit form
+        request.setAttribute("jobOffer", jobOffer);
+        request.getRequestDispatcher("views/recruiter/editJobOffer.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String jobId = request.getParameter("id");
         String jobTitle = request.getParameter("jobTitle");
         String jobDescription = request.getParameter("jobDescription");
         String validUntilStr = request.getParameter("validUntil");
-        LocalDate postedDate = LocalDate.now(); // Current date
         LocalDate validUntil;
+
         try {
             validUntil = LocalDate.parse(validUntilStr);
         } catch (DateTimeParseException e) {
-            // Handle parse exception, e.g., set an error message or redirect back to the form
             request.setAttribute("errorMessage", "Invalid date format. Please use yyyy-MM-dd.");
-            request.getRequestDispatcher("views/recruiter/addJobOffer.jsp").forward(request, response);
+            request.getRequestDispatcher("views/recruiter/editJobOffer.jsp").forward(request, response);
             return;
         }
-        JobOffer jobOffer = new JobOffer();
-        jobOffer.setJobId(UUID.randomUUID());
+
+        // Retrieve and update the job offer
+        JobOffer jobOffer = jobOfferService.findById(UUID.fromString(jobId)).get();
+
         jobOffer.setJobTitle(jobTitle);
         jobOffer.setJobDescription(jobDescription);
-        jobOffer.setStatus(Status.IN_PROGRESS);
-        jobOffer.setPostedDate(postedDate);
         jobOffer.setValidUntil(validUntil);
 
-        // Assuming you have a recruiter object retrieved from session
-        jobOffer.setRecruiter((Recruiter) request.getSession().getAttribute("user"));
-        System.out.println(jobOffer);
-        jobOfferService.save(jobOffer);
+        // Save updated job offer
+        jobOfferService.update(jobOffer);
+
         response.sendRedirect("listJobOffers");
-    }}
+    }
+}
+
