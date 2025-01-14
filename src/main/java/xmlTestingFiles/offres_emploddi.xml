@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OffresEmploi>
+    <Offre id="263374c5-cf8b-4af4-9f3f-6baeb0671dcf">
+        <Titre>Développeur Backend</Titre>
+        <Description>Développer et maintenir des APIs backend sécurisées.</Description>
+        <Statut>Ouverte</Statut>
+        <DatePublication>2025-01-01</DatePublication>
+        <DateExpiration>2025-02-01</DateExpiration>
+    </Offre>
+    <Offre id="9652d302-dd0c-4f40-adeb-aea2ff2aa1ad">
+        <Titre>Développeur Backendfffff</Titre>
+        <Description>Développer et maintenir des APIs backend sécurisées.</Description>
+        <Statut>Ouverte</Statut>
+        <DatePublication>2025-01-01</DatePublication>
+        <DateExpiration>2025-02-01</DateExpiration>
+    </Offre>
+    <Offre id="d31343cb-cb14-4c55-b0d8-c981b89e465b">
+        <Titre>Développeur Frontendggg</Titre>
+        <Description>Créer des interfaces utilisateur dynamiques et réactives.</Description>
+        <Statut>Fermée</Statut>
+        <DatePublication>2024-12-15</DatePublication>
+        <DateExpiration>2025-01-10</DateExpiration>
+    </Offre>
+</OffresEmploi>

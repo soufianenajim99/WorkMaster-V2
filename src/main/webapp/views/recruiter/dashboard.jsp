@@ -18,7 +18,7 @@
     <p>Hello, <%= session.getAttribute("user") %>! Here you can manage job postings and candidates.</p>
     <ul>
         <li><a href="${pageContext.request.contextPath}/listJobOffers">Manage Job Postings</a></li>
-        <li><a href="viewApplicants">View Applicants</a></li>
+        <li><a href="${pageContext.request.contextPath}/recruiterDashboard">View Applicants</a></li>
         <li><a class="logout" href="../logout">Logout</a></li>
     </ul>
 </div>

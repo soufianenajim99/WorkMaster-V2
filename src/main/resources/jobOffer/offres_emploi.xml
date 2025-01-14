@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="offres_emploi.xsl"?>
+<OffresEmploi xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="offres_emploi.xsd">
+    <Offre id="263374c5-cf8b-4af4-9f3f-6baeb0671dcf">
+        <Titre>Développeur Backend</Titre>
+        <Description>Développer et maintenir des APIs backend sécurisées.</Description>
+        <Statut>Ouverte</Statut>
+        <DatePublication>2025-01-01</DatePublication>
+        <DateExpiration>2025-02-01</DateExpiration>
+    </Offre>
+
+</OffresEmploi>

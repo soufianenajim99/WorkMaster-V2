@@ -10,7 +10,10 @@ import repositories.JobOfferRepositoryImpl;
 import repositories.repositoryinterfaces.JobOfferRepository;
 import services.JobOfferServiceImpl;
 import services.serviceinterfaces.JobOfferService;
+import utils.XMLFileLoader;
+import utils.XSLTransformer;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,8 +24,22 @@ public class ListJobOffersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<JobOffer> jobOffers = jobOfferService.findAll();
-        request.setAttribute("jobOffers", jobOffers);
-        request.getRequestDispatcher("views/recruiter/listJobOffers.jsp").forward(request, response);
+        try {
+            File xmlFile = XMLFileLoader.getXMLFile("jobOffer/offres_emploi.xml");
+            File xslFile = XMLFileLoader.getXMLFile("jobOffer/offres_emploi.xsl");
+
+
+            String htmlOutput = XSLTransformer.transformXML(xmlFile, xslFile);
+            response.setContentType("text/html");
+            response.getWriter().write(htmlOutput);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+//        List<JobOffer> jobOffers = jobOfferService.findAll();
+//        request.setAttribute("jobOffers", jobOffers);
+//        request.getRequestDispatcher("views/recruiter/listJobOffers.jsp").forward(request, response);
     }
 }
