@@ -2,7 +2,11 @@ package services;
 
 import dto.CondidatureListXML;
 import dto.CondidatureXML;
+import dto.JobOfferListXML;
+import dto.JobOfferXML;
 import entities.Condidature;
+import entities.JobOffer;
+import enums.Status;
 import repositories.repositoryinterfaces.CondidatureRepository;
 import services.serviceinterfaces.CondidatureService;
 
@@ -70,8 +74,55 @@ public class CondidatureServiceImpl implements CondidatureService {
     @Override
     @Transactional
     public Condidature update(Condidature condidature) {
-        // Additional validation logic can be added here
-        return condidatureRepository.update(condidature);
+
+        Condidature updatedCondidature = condidatureRepository.update(condidature);
+
+        try {
+            // Parse the existing job offers from the XML file
+            CondidatureListXML condidatureList = XMLParser.parseXML(XML_FILE, CondidatureListXML.class);
+
+
+            // Find the job offer in the XML list and update its details
+            boolean updated = false; // Flag to indicate if an update was performed
+            for (CondidatureXML condxml : condidatureList.getCondidatures()) {
+                if (condxml.getId().toString().trim().equals(condidature.getId().toString().trim())) {
+                    // Update the details of the matched job offer
+                    condxml.setStatus(condidature.getStatus().name());
+                    updated = true;
+                    break;
+                }
+            }
+
+            if (updated) {
+                // Write the updated list back to the XML file (overwrite)
+                utils.condidatureXMLUtils.XMLWriter.writeXML(condidatureList, XML_FILE);
+                System.out.println("Job offer updated in XML.");
+            } else {
+                System.out.println("Job offer not found in XML for update.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return updatedCondidature;
+    }
+
+    @Transactional
+    public void acceptCondidature(UUID id) {
+        Condidature condidature = condidatureRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Condidature not found"));
+
+        condidature.setStatus(Status.ACCEPTED);
+        update(condidature);
+    }
+
+    @Transactional
+    public void rejectCondidature(UUID id) {
+        Condidature condidature = condidatureRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Condidature not found"));
+
+        condidature.setStatus(Status.REJECTED);
+        update(condidature);
     }
 
     @Override
