@@ -1,6 +1,9 @@
 package utils;
 
 import jakarta.servlet.ServletContext;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,4 +53,30 @@ public class XMLFileLoader {
 
         return xmlFile;
     }
+
+    public static File createXMLFileFromObject(Object object, String filePath, ServletContext context) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
+        Marshaller marshaller = jaxbContext.createMarshaller();
+
+        // Pretty print the XML output (optional)
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        // Get the real path for the file
+        String realPath = context.getRealPath("/WEB-INF/data/") + filePath;
+
+        // Create the file
+        File xmlFile = new File(realPath);
+
+        // Ensure the directory exists, create if necessary
+        File parentDir = xmlFile.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs(); // Create parent directories if they don't exist
+        }
+
+        // Marshal the object into the XML file
+        marshaller.marshal(object, xmlFile);
+
+        return xmlFile; // Return the file reference
+    }
+
 }

@@ -13,6 +13,6 @@ public class XSLTransformer {
         StringWriter writer = new StringWriter();
         transformer.transform(new StreamSource(xmlFile), new StreamResult(writer));
 
-        return writer.toString(); // HTML as a string
+        return writer.toString();
     }
 }

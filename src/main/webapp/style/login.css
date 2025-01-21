@@ -1,54 +1,105 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+/* Reset some default styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for the login form */
 .container {
-    width: 300px;
-    margin: 100px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.form-group {
-    margin-bottom: 15px;
+/* Title styling */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
+/* Form group container */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Labels */
 label {
+    font-size: 14px;
+    color: #555;
     display: block;
     margin-bottom: 5px;
 }
 
-input, select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
+/* Input fields */
+input[type="text"],
+input[type="password"],
+select {
     width: 100%;
     padding: 10px;
-    background-color: #5cb85c;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #4CAF50;
+}
+
+/* Button styles */
+button {
+    background-color: #4CAF50;
     color: white;
+    padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 15px;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: #45a049;
 }
 
+/* Apply job section */
 .apply-job {
-    text-align: center;
     margin-top: 20px;
+    font-size: 14px;
+}
+
+.apply-job a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.apply-job a:hover {
+    text-decoration: underline;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
 }

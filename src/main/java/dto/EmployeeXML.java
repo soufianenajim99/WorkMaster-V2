@@ -1,6 +1,7 @@
 package dto;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import utils.LocalDateAdapter;
 import utils.UUIDAdapter;
 
 import java.time.LocalDate;
@@ -29,12 +30,14 @@ public class EmployeeXML {
     private double performanceRating;
 
     @XmlElement(name = "HireDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate hireDate;
 
     @XmlElement(name = "SocialSecurityNumber")
     private String socialSecurityNumber;
 
     @XmlElement(name = "DateOfBirth")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateOfBirth;
 
     @XmlElement(name = "Salary")

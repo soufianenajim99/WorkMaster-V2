@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        // Use AuthenticationService instead of UserService
+
         AuthenticationService authenticationService = new AutenticationServiceImpl();
 
         boolean isAuthenticated = false;
@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession();
                     Admin admin =(Admin) authenticationService.getUser("Admin",username,password);
                     session.setAttribute("user", admin);
+                    session.setAttribute("role", "admin");
                     response.sendRedirect("views/admin/dashboard.jsp"); // Redirect to admin dashboard
                 }
                 break;
@@ -45,7 +46,7 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession();
                     Recruiter recruiter =(Recruiter) authenticationService.getUser("Recruiter",username,password);
                     session.setAttribute("user", recruiter);
-
+                    session.setAttribute("role", "recruiter");
                     response.sendRedirect("views/recruiter/dashboard.jsp"); // Redirect to recruiter dashboard
                 }
                 break;
@@ -57,6 +58,7 @@ public class LoginServlet extends HttpServlet {
                     Employee employee =(Employee) authenticationService.getUser("Employee",username,password);
 
                     session.setAttribute("user", employee);
+                    session.setAttribute("role", "employee");
                     response.sendRedirect("views/employee/dashboard.jsp"); // Redirect to employee dashboard
                 }
                 break;
