@@ -1,42 +1,34 @@
-package entities;
-
-import enums.Status;
-import jakarta.persistence.*;
+package dto;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import utils.LocalDateAdapter;
+import utils.UUIDAdapter;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
+@XmlAccessorType(XmlAccessType.FIELD)
+public class LeaveXML {
 
-@Entity
-@Table(name = "leaves")
-public class Leave {
-    @Id
-    @Column(name = "request_id", columnDefinition = "uuid")
+    @XmlAttribute(name = "requestId")
     private UUID requestId;
 
-    @Column(name = "startdate", nullable = false)
+    @XmlElement(name = "StartDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate startDate;
 
-    @Column(name = "enddate", nullable = false)
+    @XmlElement(name = "EndDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate endDate;
 
-    @Column(name = "reason", nullable = false)
+    @XmlElement(name = "Reason")
     private String reason;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status;
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @XmlElement(name = "Status")
+    private String status;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+    @XmlElement(name = "EmployeeId")
+    private UUID employeeId;
 
     // Getters and Setters
     public UUID getRequestId() {
@@ -71,11 +63,19 @@ public class Leave {
         this.reason = reason;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public UUID getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(UUID employeeId) {
+        this.employeeId = employeeId;
     }
 }

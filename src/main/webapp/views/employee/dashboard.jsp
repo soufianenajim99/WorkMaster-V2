@@ -17,8 +17,8 @@
     <h1>Welcome to the Employee Dashboard</h1>
     <p>Hello, <%= session.getAttribute("user") %>! Here you can view your tasks and update your profile.</p>
     <ul>
-        <li><a href="viewTasks">View Tasks</a></li>
-        <li><a href="updateProfile">Update Profile</a></li>
+        <li><a href="${pageContext.request.contextPath}/listLeaves">View Leavs</a></li>
+        <li><a href="${pageContext.request.contextPath}/saveEmployee">Edit Personal Info</a></li>
         <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
     </ul>
 </div>

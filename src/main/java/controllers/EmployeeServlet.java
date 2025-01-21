@@ -16,7 +16,10 @@ import services.AdminServiceImpl;
 import services.EmployeeServiceImpl;
 import services.serviceinterfaces.AdminService;
 import services.serviceinterfaces.EmployeeService;
+import utils.XMLFileLoader;
+import utils.XSLTransformer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -35,9 +38,18 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Employee> employees = employeeService.findAll();
-        request.setAttribute("employees", employees);
-        request.getRequestDispatcher("views/admin/employees.jsp").forward(request, response);
+        try {
+            File xmlFile = XMLFileLoader.getXMLFile("employees/employees.xml");
+            File xslFile = XMLFileLoader.getXMLFile("employees/employees.xsl");
+
+
+            String htmlOutput = XSLTransformer.transformXML(xmlFile, xslFile);
+            response.setContentType("text/html");
+            response.getWriter().write(htmlOutput);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }

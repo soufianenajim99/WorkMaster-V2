@@ -20,7 +20,7 @@
     <p>Hello, <%= admin.getId()  %>! Here you can manage the system.</p>
     <ul>
         <li><a href="${pageContext.request.contextPath}/manageEmployees">Manage Users</a></li>
-        <li><a href="viewReports">View Reports</a></li>
+        <li><a href="${pageContext.request.contextPath}/listLeaves">Manage Leaves</a></li>
         <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
     </ul>
 </div>
