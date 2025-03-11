@@ -13,6 +13,7 @@
         <class>entities.Condidature</class>
         <class>entities.JobOffer</class>
         <!--        <class>entities.Department</class>-->
+        <!--        <class>entities.Department</class>-->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/WorkmasterV2"/>
