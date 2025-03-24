@@ -21,12 +21,12 @@ CREATE TABLE employees (
 )INHERITS(users);
 
 CREATE TABLE admins (
-    PRIMARY KEY (id),
+    PRIMARY KEY (id)
 )INHERITS(users);
 
 -- Table: recruiter (inherits from users)
 CREATE TABLE recruiters (
-   PRIMARY KEY (id),
+   PRIMARY KEY (id)
 )INHERITS(users);
 
 CREATE TABLE job_offer (
